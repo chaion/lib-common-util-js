@@ -1,4 +1,4 @@
-import HttpClient from 'util/httpclient';
+import HttpClient from './util/httpclient';
 
 export {
     HttpClient,
