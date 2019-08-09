@@ -9,7 +9,62 @@ function hexStringToInt(str) {
     return parseInt(strNo0x, 16);
 }
 
+function hexToAscii(hex) {
+    // if (!isHexStrict(hex))
+    //     throw new Error('The parameter must be a valid HEX string.');
+
+    let str = '';
+    let i = 0;
+    const l = hex.length;
+    if (hex.substring(0, 2) === '0x') {
+        i = 2;
+    }
+    for (; i < l; i += 2) {
+        const code = parseInt(hex.substr(i, 2), 16);
+        str += String.fromCharCode(code);
+    }
+
+    return str;
+}
+
+function stripZeroXHexString(str) {
+    if(isHex(str)){
+        str = str.toLowerCase();
+        str = str.startsWith('0x')? str.slice(2): str;
+        return str;
+    }else{
+        throw Error('input must be a hex string')
+    }
+}
+
+function isHex(val) {
+    return typeof val === 'string' && /^(-0x|0x)?[0-9a-f]+$/i.test(val) === true;
+}
+
+function removeLeadingZeroX(val) {
+    return /^0x/i.test(val) === true ? val.replace(/^0x/i, '') : val;
+}
+
+function hexString2Array(str) {
+    if (str.startsWith('0x')) {
+        str = str.substring(2);
+    }
+
+    let result = [];
+    while (str.length >= 2) {
+        result.push(parseInt(str.substring(0, 2), 16));
+        str = str.substring(2, str.length);
+    }
+
+    return result;
+}
+
 export {
     appendHexStart,
     hexStringToInt,
+    hexToAscii,
+    stripZeroXHexString,
+    isHex,
+    removeLeadingZeroX,
+    hexString2Array
 };
