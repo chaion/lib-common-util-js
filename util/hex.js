@@ -59,7 +59,26 @@ function hexString2Array(str) {
     return result;
 }
 
+function toHex(value) {
+    if (!value) {
+        return '0x00';
+    } else if (typeof value === 'string') {
+        return hexutil.appendHexStart(value);
+    } else if (value instanceof Buffer) {
+        return hexutil.appendHexStart(value.toString('hex'));
+    } else if (typeof value === 'number') {
+        return hexutil.appendHexStart(value.toString(16));
+    } else if (value instanceof Uint8Array) {
+        return hexutil.appendHexStart(Buffer.from(value).toString('hex'));
+    } else if (BigNumber.isBigNumber(value)) {
+        return hexutil.appendHexStart(value.toString(16));
+    } else {
+        throw value;
+    }
+}
+
 export {
+    toHex,
     appendHexStart,
     hexStringToInt,
     hexToAscii,
