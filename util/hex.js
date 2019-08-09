@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+
 function appendHexStart(str){
     let str1 = str.startsWith('0x')? str.substring(2): str;
     let str2 = str1.length % 2 ? '0' + str1: str1;
