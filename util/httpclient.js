@@ -37,7 +37,7 @@ function requestAPI(method, url, _headers = {}, _dataBody, isJSON = false) {
     return axios(config);
 }
 
-const HttpClient = {
+const httpClient = {
     get(url, dataBody, isJSON = false, headers = {}) {
         return requestAPI(METHOD_GET, url, headers, dataBody, isJSON);
     },
@@ -55,4 +55,4 @@ const HttpClient = {
     },
 };
 
-export default HttpClient;
+export default httpClient;
