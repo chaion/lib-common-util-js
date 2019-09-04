@@ -48,6 +48,10 @@ function requestAPI(method, url) {
 
   if (method === METHOD_GET) {
     config.params = dataBody;
+
+    config.paramsSerializer = function (params) {
+      return _querystring["default"].stringify(params);
+    };
   } else {
     config.data = dataBody;
   }
