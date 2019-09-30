@@ -1,4 +1,4 @@
-import bip39 from 'bip39';
+import * as bip39 from 'bip39';
 
 const validateAmount  = (amount) => {
     return /^[0-9]?((\.[0-9]+)|([0-9]+(\.[0-9]+)?))$/.test(amount);
@@ -14,7 +14,7 @@ const validateMnemonic = (mnemonic) => {
         .split(/\s+/)
         .join(' ');
     return bip39.validateMnemonic(mnemonicFormat);
-}
+};
 
 export {
     validateAmount,

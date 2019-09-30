@@ -30,6 +30,9 @@ function requestAPI(method, url, _headers = {}, _dataBody, isJSON = false, timeo
 
     if (method === METHOD_GET) {
         config.params = dataBody;
+        config.paramsSerializer=params => {
+            return qs.stringify(params)
+        }
     } else {
         config.data = dataBody;
     }
