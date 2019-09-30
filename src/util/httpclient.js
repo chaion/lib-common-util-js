@@ -6,7 +6,7 @@ const METHOD_POST = 'post';
 const METHOD_PUT = 'put';
 const METHOD_DELETE = 'delete';
 
-function requestAPI(method, url, _headers = {}, _dataBody, isJSON = false) {
+function requestAPI(method, url, _headers = {}, _dataBody, isJSON = false, timeout=90) {
     const headers = _headers;
     let dataBody = _dataBody;
 
@@ -20,12 +20,12 @@ function requestAPI(method, url, _headers = {}, _dataBody, isJSON = false) {
         headers['Content-Type'] = 'application/x-www-form-urlencoded';
         dataBody = qs.stringify(dataBody);
     }
-    console.log('databody=>', dataBody);
     const config = {
         url,
         headers,
         method,
         validateStatus: () => true,
+        timeout: timeout * 1000,
     };
 
     if (method === METHOD_GET) {

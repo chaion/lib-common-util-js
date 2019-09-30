@@ -22,6 +22,7 @@ function requestAPI(method, url) {
   var _dataBody = arguments.length > 3 ? arguments[3] : undefined;
 
   var isJSON = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  var timeout = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 90;
   var headers = _headers;
   var dataBody = _dataBody;
 
@@ -36,14 +37,14 @@ function requestAPI(method, url) {
     dataBody = _querystring["default"].stringify(dataBody);
   }
 
-  console.log('databody=>', dataBody);
   var config = {
     url: url,
     headers: headers,
     method: method,
     validateStatus: function validateStatus() {
       return true;
-    }
+    },
+    timeout: timeout * 1000
   };
 
   if (method === METHOD_GET) {
